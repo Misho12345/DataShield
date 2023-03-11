@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Data Shield</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body onload="init()" class="full-fill">
+
+
+        <canvas id="canvas" class="full-fill"></canvas>
+
+        <div id="ui" class="full-fill">
+            <div class="side-list ui" style="top: 0; right: 0;">
+                <div class="center flex-dir-column">
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation1" class="center"></div>
+                        <img class="icon" src="Images/UI/heart.png" alt="" />
+                        <span id="health" class="side-list-el-v">0</span>
+                    </div>
+
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation2" class="center"></div>
+                        <img class="icon" src="Images/UI/coin.gif" alt="" />
+                        <span id="zoins" class="side-list-el-v">0</span>
+                    </div>
+
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation3" class="center"></div>
+                        <img class="icon" src="Images/UI/steel.gif" alt="" />
+                        <span id="steel" class="side-list-el-v">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-list ui" style="top: 50%; right: 0;">
+                <div class="center flex-dir-column">
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation4" class="center"></div>
+                        <img class="icon" src="Images/UI/strength.png" alt="" />
+                        <span id="strength" class="side-list-el-v">0</span>
+                    </div>
+
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation5" class="center"></div>
+                        <img class="icon" src="Images/UI/speed.png" alt="" />
+                        <span id="speed" class="side-list-el-v">0</span>
+                    </div>
+
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation6" class="center"></div>
+                        <img class="icon" src="Images/UI/hitSpeed.png" alt="" />
+                        <span id="hitSpeed" class="side-list-el-v">0</span>
+                    </div>
+
+                    <div class="center flex-dir-row side-list-el">
+                        <div id="animation7" class="center"></div>
+                        <img class="icon" src="Images/UI/bulletSpeed.png" alt="" />
+                        <span id="bulletSpeed" class="side-list-el-v">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <img id="pause-button" class="ui" onclick="PausePlay()" src="Images/UI/pause.png" alt="pause button" />
+
+            <img id="ui-battery" class="ui" src="Images/UI/Battery/battery0.png" alt="UI battery img" />
+
+            <div class="ui center flex-dir-column" style="left: 25%; right: 25%; row-gap: 25%; height: 10%; top: 5%;">
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+                <div id="text-under-progress-bar"></div>
+            </div>
+
+            <div id="pause-menu" class="ui full-fill center flex-dir-column">
+                <div id="pause-menu-header">Paused</div>
+                <div class="pause-menu-option" onclick="PausePlay()">Resume</div>
+                <div class="pause-menu-option">Back to main page</div>
+            </div>
+
+            <div id="shop" class="ui full-fill">
+                <div id="shop-border" class="ui center flex-dir-row">
+                    <div class="shop-column">
+                        <div class="column-title center">Weapons</div>
+                        <div class="column-content">
+                            <div id="laser-item" class="shop-item" onclick="BuyLaser(); this.parentElement.parentElement.remove()">
+                                <div class="item-image center flex-dir-column">
+                                    <div class="center">
+                                        <img src="Images/UI/laser.png" alt="">
+                                    </div>
+                                    <span class="center">Laser</span>
+                                </div>
+
+                                <div class="item-price center flex-dir-row">
+                                    <div>300</div>
+                                    <img src="Images/UI/coin.gif" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shop-column">
+                        <div class="column-title">Upgrade Hardware</div>
+                        <div class="column-content">
+                            <div class="shop-item" onclick="UpgradeCPU()">
+                                <div class="item-image center flex-dir-column">
+                                    <div class="center">
+                                        <img src="Images/UI/CPU.png" alt="">
+                                    </div>
+                                    <span class="center">CPU</span>
+                                </div>
+
+                                <div class="item-price center flex-dir-row">
+                                    <div id="CPUPrice">10</div>
+                                    <img src="Images/UI/steel.gif" alt="">
+                                </div>
+                            </div>
+
+                            <div class="shop-item" onclick="UpgradeGPU()">
+                                <div class="item-image center flex-dir-column">
+                                    <div class="center">
+                                        <img src="Images/UI/GPU.png" alt="">
+                                    </div>
+                                    <span class="center">GPU</span>
+                                </div>
+
+                                <div class="item-price center flex-dir-row">
+                                    <div id="GPUPrice">20</div>
+                                    <img src="Images/UI/steel.gif" alt="">
+                                </div>
+                            </div>
+
+                            <div class="shop-item" onclick="UpgradeBattery()">
+                                <div class="item-image center flex-dir-column">
+                                    <div class="center">
+                                        <img src="Images/UI/battery.png" alt="">
+                                    </div>
+                                    <span class="center">Battery</span>
+                                </div>
+
+                                <div class="item-price center flex-dir-row">
+                                    <div id="BatteryPrice">30</div>
+                                    <img src="Images/UI/steel.gif" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shop-column">
+                        <div class="column-title center">Other</div>
+                        <div class="column-content">
+                            <div class="shop-item" onclick="BuyEnergy(5)">
+                                <div class="item-image center flex-dir-column">
+                                    <div class="center">
+                                        <img src="Images/UI/energy.png" alt="">
+                                    </div>
+                                    <span class="center">25% Energy</span>
+                                </div>
+
+                                <div class="item-price center flex-dir-row">
+                                    <div>5</div>
+                                    <img src="Images/UI/coin.gif" alt="">
+                                </div>
+                            </div>
+
+                            <div class="shop-item" onclick="BuyHp(20)">
+                                <div class="item-image center flex-dir-column">
+                                    <div class="center">
+                                        <img src="Images/UI/heart.png" alt="">
+                                    </div>
+                                    <span class="center">5 HP</span>
+                                </div>
+
+                                <div class="item-price center flex-dir-row">
+                                    <div>20</div>
+                                    <img src="Images/UI/coin.gif" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="popups" class="full-fill center"></div>
+        </div>
+
+        <div style="display: none">
+            <img src="Images/battery.png" id="batteryImage" alt="" />
+            <img src="Images/GPU.png" id="GPUImage" alt="" />
+            <img src="Images/CPU.png" id="CPUImage" alt="" />
+            <img src="Images/motherboard.png" id="motherboard" alt="" />
+
+            <img src="Images/Enemies/Virus/Virus.png" id="VirusImage" alt="" />
+            <img src="Images/Enemies/wormHead.png" id="wormHeadImage" alt="" />
+            <img src="Images/Enemies/wormTale.png" id="wormTaleImage" alt="" />
+            <img src="Images/Enemies/kon.png" id="konImage" alt="" />
+            <img src="Images/Enemies/hlebarka.png" id="hlebarkaImage" alt="" />
+            <img src="Images/Enemies/cage.png" id="cageImage" alt="" />
+
+            <img src="Images/Weapons/magnum.png" id="magnum" alt="" />
+            <img src="Images/Weapons/magnumBullet.png" id="magnumBullet" alt="" />
+
+            <img src="Images/Weapons/laser.png" id="laser" alt="" />
+            <img src="Images/Weapons/laserProj.png" id="laserProj" alt="" />
+
+            <img src="Images/player.png" id="player" alt="" />
+
+            <img src="Images/folder.png" id="folderImage" alt="" />
+            <img src="Images/antivirus.png" id="antivirusImage" alt="" />
+            <img src="Images/wifiatack.png" id="wifiattackImage" alt="" />
+
+            <img src="Images/firewall.png" id="firewallImage" alt="" />
+            <img src="Images/firewallLogo.png" id="firewallLogoImage" alt="" />
+        </div>
+
+        <script src="Scripts/ShopActions.js"></script>
+        <script src="Scripts/PopupAds.js"></script>
+
+        <script src="Scripts/BaseScripts/Vector2.js"></script>
+        <script src="Scripts/BaseScripts/Transform.js"></script>
+        <script src="Scripts/BaseScripts/Renderer.js"></script>
+        <script src="Scripts/BaseScripts/Animator.js"></script>
+        <script src="Scripts/BaseScripts/GameObject.js"></script>
+        <script src="Scripts/BaseScripts/Input.js"></script>
+        <script src="Scripts/BaseScripts/Main.js"></script>
+
+        <script src="Scripts/ComputerComponents/Battery.js"></script>
+        <script src="Scripts/ComputerComponents/GPU.js"></script>
+        <script src="Scripts/ComputerComponents/CPU.js"></script>
+        <script src="Scripts/ComputerComponents/Antivirus.js"></script>
+        <script src="Scripts/ComputerComponents/Folder.js   "></script>
+
+        <script src="Scripts/Enemy/Enemies/Enemy.js"></script>
+        <script src="Scripts/Enemy/Enemies/Virus.js"></script>
+        <script src="Scripts/Enemy/Enemies/Worm.js"></script>
+        <script src="Scripts/Enemy/Enemies/TrojanHorse.js"></script>
+        <script src="Scripts/Enemy/Enemies/Bugs.js"></script>
+
+        <script src="Scripts/Enemy/Waves.js"></script>
+
+        <script src="Scripts/Weapon.js"></script>
+        <script src="Scripts/PlayerInput.js"></script>
+        <script src="Scripts/PlayerStats.js"></script>
+
+        <script src="Scripts/PlayerAbilities.js"></script>
+
+        <!--<video muted poster="./Images/background.png" id="endScreen">
+            <source src="./Images/ded.mp4" type="video/mp4">
+        </video>-->
+    </body>
+</html>
