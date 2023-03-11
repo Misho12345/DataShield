@@ -21,7 +21,7 @@ class Virus extends Enemy {
             this.animator.stage = 1;
             
             this.zahapahCD = 300;
-            //this.hp=-1;
+            playerStats.increaseHp(-1);
         } else if (this.zahapahCD<150) {
             
             this.animator.stage = 0;

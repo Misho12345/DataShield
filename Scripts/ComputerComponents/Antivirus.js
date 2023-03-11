@@ -7,7 +7,7 @@ function angleCalc(cX, cY, x, y) {
 }
 class Turet extends GameObject {
     constructor(model) {
-        super(new Vector2(input.transform.position.x, input.transform.position.y), new Vector2(200, 200));
+        super(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(200, 200));
         this.imageid = 'antivirusImage';
         this.model = model;
         this.updates = 0;
@@ -36,15 +36,16 @@ class Turet extends GameObject {
         this.animator.Play(0);
         this.animator.Draw = () => {
             //for (let i = 0; i < this.bullets.length; i++) {
-               // console.log("dsadsa")
-                //this.bullets[i].draw();
+            // console.log("dsadsa")
+            //this.bullets[i].draw();
             //}
         }
         this.fakeRandomizer = randomInteger(3);
     }
 
+
+
     Update() {
-        
         if (batteryUpdate.charge > batteryUpdate.cap / 10) {
             this.updates++;
             if (this.model == 'SX-R226') {
@@ -54,7 +55,7 @@ class Turet extends GameObject {
                 //}
                 for (let i = 0; i < enemies.length; i++) {
                     //console.log("asd"); 
-                    if (this.transform.position.DistanceFrom(enemies[i].transform.position) < 2400 && this.updates % 200 == 0 && enemies[i].animator.stage!=4) {
+                    if (this.transform.position.DistanceFrom(enemies[i].transform.position) < 2400 && this.updates % 200 == 0 && enemies[i].animator.stage != 4) {
                         // console.log("dsadsa");
                         batteryUpdate.charge -= 10;
                         wifiBullets.push(new wifiBullet(
@@ -113,18 +114,18 @@ class Turet extends GameObject {
 }
 let wifiBullets = [];
 class wifiBullet extends GameObject {
-    constructor(x,y,targetVector2) {
+    constructor(x, y, targetVector2) {
         super(new Vector2(x, y), new Vector2(150, 150));
-        this.imageid = 'wifiatackImage';
+        this.imageId = 'wifiatackImage';
 
-        this.enemyidx = wifiBullets.length-1;
+        this.enemyidx = wifiBullets.length - 1;
 
         this.transform.Update = () => {
             if (typeof this.Update !== "undefined") this.Update();
         }
         this.animator = this.AddComponent(Animator);
         this.animator.stages = [{ delay: 0.1, length: 1 }];
-        this.animator.image = this.imageid;
+        this.animator.image = this.imageId;
         this.targetVector2 = targetVector2
         this.animator.Play(0);
         this.animator.Draw = () => {
@@ -143,7 +144,7 @@ class wifiBullet extends GameObject {
             this.transform.position.y,
             this.targetVector2.transform.position.x,
             this.targetVector2.transform.position.y);
-        this.transform.position.x += Math.cos(angle)*8;
+        this.transform.position.x += Math.cos(angle) * 8;
         this.transform.position.y += Math.sin(angle) * 8;
         if (areColliding(this.transform, this.targetVector2.transform)) {
             this.targetVector2.hp -= 5;
@@ -158,7 +159,7 @@ class wifiBullet extends GameObject {
     Draw() {
         //console.log(this.x, this.y);
         context.fillStyle = "lime";
-        context.fillRect(this.x,this.y,300,300);
+        context.fillRect(this.x, this.y, 300, 300);
         context.strokeStyle = "blue";
         context.lineWidth = 30;
         context.beginPath();

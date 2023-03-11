@@ -30,6 +30,8 @@ class Bug extends Enemy {
             this.y = this.transform.position.y;
             this.zahapahCD = 300;
             //this.hp=-1;
+
+            playerStats.increaseHp(-1);
         } else if (this.zahapahCD < 150) {
             //this.transform.position.x = this.x;
             //this.transform.position.y = this.y;
